@@ -17,8 +17,8 @@ class BackButtonOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 15, // Access top using .top
-      left: (padding as EdgeInsets?)?.left ?? 0, // Access left using .left
+      top: 25, // Access top using .top
+      left: 15, // Access left using .left
       child: SafeArea(
         child: IconButton(
           padding: padding ?? EdgeInsets.zero,

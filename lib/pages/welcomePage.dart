@@ -111,9 +111,7 @@ class WelcomePage extends StatelessWidget {
             ),
           ),
           // Back Button Overlay
-          const BackButtonOverlay(
-            padding: EdgeInsets.only(top: 15, left: 10), // Adjust padding for precise positioning
-          ),
+          const BackButtonOverlay(),
         ],
       ),
     );

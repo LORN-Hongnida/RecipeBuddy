@@ -30,9 +30,7 @@ class OnboardingPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           // Back Arrow Button
-          const BackButtonOverlay( // Use the reusable widget
-            padding: EdgeInsets.only(top: 15, left: 10), // Adjust padding for precise positioning
-          ),
+          const BackButtonOverlay(),
           // Top Text Elements
           Positioned(
             top: 80, // Adjust to avoid overlap with the arrow

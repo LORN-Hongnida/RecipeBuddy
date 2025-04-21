@@ -23,9 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButtonOverlay(
-          padding: EdgeInsets.only(top: 15, left: 10), // Adjust padding for precise positioning
-        ),
+        leading: const BackButtonOverlay(),
         title: const Text(
           'Login',
           style: TextStyle(color: Colors.orange),

@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final Widget? suffixIcon;
   final double hintOpacity;
+  final double fillOpacity;
 
   const CustomTextField({
     super.key,
@@ -14,7 +15,8 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.suffixIcon,
-    this.hintOpacity = 0.6,
+    this.hintOpacity = 0.4,
+    this.fillOpacity = 0.5,
   });
 
   @override
@@ -26,7 +28,7 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: Color.fromARGB(255, 246, 211, 168).withOpacity(0.5), // Match input background
+        fillColor: Color.fromARGB(255, 246, 211, 168).withOpacity(fillOpacity), // Match input background
         hintText: hintText,
         hintStyle: TextStyle(
           color: Color.fromARGB(255, 122, 51, 15).withOpacity(hintOpacity),
@@ -36,9 +38,10 @@ class CustomTextField extends StatelessWidget {
       ),
       keyboardType: keyboardType,
       style: TextStyle(
-        color: Color.fromARGB(255, 122, 51, 15),
+        color: Color.fromARGB(255, 163, 66, 16),
       ),
       obscureText: obscureText,
+      
     );
   }
 }

@@ -19,7 +19,7 @@ class GetInspiredPage extends StatelessWidget {
           ),
           // Top Text Elements
           Positioned(
-            top: 80,
+            top: 100,
             left: 30,
             right: 20,
             child: Column(

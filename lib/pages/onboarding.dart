@@ -34,7 +34,7 @@ class OnboardingPage extends StatelessWidget {
           const BackButtonOverlay(),
           // Top Text Elements
           Positioned(
-            top: 80, // Adjust to avoid overlap with the arrow
+            top: 100, // Adjust to avoid overlap with the arrow
             left: 30,
             right: 20,
             child: Column(

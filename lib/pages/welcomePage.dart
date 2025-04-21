@@ -29,51 +29,27 @@ class WelcomePage extends StatelessWidget {
                       children: [
                         ImageCard(
                           imageUrl: 'https://bosskitchen.com/wp-content/uploads/2021/08/korean-fried-chicken-recipe.jpg',
-                          onTap: () {
-                            print('Dish 1 Tapped');
-                            // Handle tap
-                          },
                         ),
                         ImageCard(
                           imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.kG7PLRbcPtrCsDpfPUyEGwHaI0?w=1200&h=1429&rs=1&pid=ImgDetMain',
-                          onTap: () {
-                            print('Waffles Tapped');
-                            // Handle tap
-                          },
                         ),
                         ImageCard(
                           imageUrl: 'https://tse4.mm.bing.net/th/id/OIP.wVGElzaepMnY_Pfj29QJgwHaLH?rs=1&pid=ImgDetMain',
-                          onTap: () {
-                            print('Wrap Tapped');
-                            // Handle tap
-                          },
                         ),
                         ImageCard(
                           imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.RwhooZyHtn_haZn-sIsciAHaE8?w=1620&h=1080&rs=1&pid=ImgDetMain',
-                          onTap: () {
-                            print('Lasagna Tapped');
-                            // Handle tap
-                          },
                         ),
                         ImageCard(
                           imageUrl: 'https://lovefoodfeed.com/wp-content/uploads/2023/01/Macarons-px-1200-01-1-1024x1024.jpg',
-                          onTap: () {
-                            print('Macarons Tapped');
-                            // Handle tap
-                          },
                         ),
                         ImageCard(
                           imageUrl: 'https://cocktailflavors.com/wp-content/uploads/2024/03/pisco-mojito-cocktail-recipe_001-683x1024.png',
-                          onTap: () {
-                            print('Mojito Tapped');
-                            // Handle tap
-                          },
                         ),
                       ],
                     ),
                   )
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 const Text(
                   'Welcome',
                   style: TextStyle(
@@ -107,6 +83,7 @@ class WelcomePage extends StatelessWidget {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                   },
                 ),
+                const SizedBox(height: 15,)
               ],
             ),
           ),

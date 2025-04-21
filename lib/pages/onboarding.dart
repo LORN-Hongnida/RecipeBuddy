@@ -29,6 +29,7 @@ class OnboardingPage extends StatelessWidget {
             imagePath,
             fit: BoxFit.cover,
           ),
+
           // Back Arrow Button
           const BackButtonOverlay(),
           // Top Text Elements
@@ -60,7 +61,7 @@ class OnboardingPage extends StatelessWidget {
           ),
           // Continue Button at the Bottom
           Positioned(
-            bottom: 30,
+            bottom: 40,
             left: 0,
             right: 0,
             child: Center(

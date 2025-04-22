@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/pages/login.dart';
-import 'package:recipe_app/widget/roundedButton.dart';
-import 'package:recipe_app/widget/customTextField.dart';
-import 'package:recipe_app/widget/backButton.dart';
-import 'package:recipe_app/widget/passwordVisibilityToggle.dart';
+import 'package:recipe_app/pages/login_page.dart';
+import 'package:recipe_app/widget/rounded_button.dart';
+import 'package:recipe_app/widget/custom_text_field.dart';
+import 'package:recipe_app/widget/back_button.dart';
+import 'package:recipe_app/widget/password_visibility_toggle.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});

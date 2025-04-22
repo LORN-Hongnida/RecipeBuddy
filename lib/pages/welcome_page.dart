@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/pages/login.dart';
-import 'package:recipe_app/widget/roundedButton.dart';
-import 'package:recipe_app/widget/imageCard.dart'; // Import the new widget
-import 'package:recipe_app/widget/backButton.dart';
-import 'package:recipe_app/pages/login.dart';
+import 'package:recipe_app/pages/login_page.dart';
+import 'package:recipe_app/widget/rounded_button.dart';
+import 'package:recipe_app/widget/image_card.dart'; // Import the new widget
+import 'package:recipe_app/widget/back_button.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});

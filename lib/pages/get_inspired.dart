@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/pages/onboarding.dart'; // Import the OnboardingPage
-import 'package:recipe_app/pages/welcomePage.dart';
-import 'package:recipe_app/widget/roundedButton.dart';
+import 'package:recipe_app/pages/onboard_page.dart'; // Import the OnboardingPage
+import 'package:recipe_app/pages/welcome_page.dart';
+import 'package:recipe_app/widget/rounded_button.dart';
 
 class GetInspiredPage extends StatelessWidget {
   const GetInspiredPage({super.key});
@@ -60,7 +60,7 @@ class GetInspiredPage extends StatelessWidget {
                         imagePath: 'assets/images/onboard.jpg',
                         title: 'Enhance Your Cooking',
                         description: 'Learn new techniques and tips from expert chefs.',
-                        buttonText: 'Explore',
+                        buttonText: 'Continue',
                         onButtonPressed: () {
                           Navigator.push(
                               context, MaterialPageRoute(builder: (context) => WelcomePage()));

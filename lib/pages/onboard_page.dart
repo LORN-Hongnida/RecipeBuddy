@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/pages/welcomePage.dart';
-import 'package:recipe_app/widget/backButton.dart';
+import 'package:recipe_app/widget/back_button.dart';
+import 'package:recipe_app/widget/rounded_button.dart';
 
 class OnboardingPage extends StatelessWidget {
   final String imagePath;
@@ -65,20 +65,9 @@ class OnboardingPage extends StatelessWidget {
             left: 0,
             right: 0,
             child: Center(
-              child: ElevatedButton(
+              child: RoundedButton(
+                text: buttonText,
                 onPressed: onButtonPressed,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 246, 211, 168),
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                child: Text(
-                  buttonText,
-                  style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 233, 133, 82)),
-                ),
               ),
             ),
           ),

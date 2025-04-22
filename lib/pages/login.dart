@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/widget/roundedButton.dart';
 import 'package:recipe_app/widget/customTextField.dart';
 import 'package:recipe_app/widget/backButton.dart';
+import 'package:recipe_app/pages/signup.dart';
+import 'package:recipe_app/widget/passwordVisibilityToggle.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -58,12 +60,10 @@ class _LoginPageState extends State<LoginPage> {
                 CustomTextField(
                   hintText: '••••••••',
                   obscureText: _obscureText,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureText ? Icons.visibility_off : Icons.visibility,
-                    ),
-                    onPressed: _togglePasswordVisibility,
-                  ),
+                  suffixIcon: PasswordVisibilityToggle(
+                    isVisible: !_obscureText,
+                    onToggleVisibility: _togglePasswordVisibility,
+                  )
                 ),
                 const SizedBox(height: 30),
                 RoundedButton(
@@ -71,15 +71,6 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     // Handle Log In action
                     print('Log In pressed');
-                    // Navigator.push(...)
-                  },
-                ),
-                const SizedBox(height: 10),
-                RoundedButton(
-                  text: 'Sign Up',
-                  onPressed: () {
-                    // Handle Sign Up action
-                    print('Sign Up pressed');
                     // Navigator.push(...)
                   },
                 ),
@@ -119,9 +110,9 @@ class _LoginPageState extends State<LoginPage> {
                     const Text('Don\'t have an account? ', style: TextStyle(color: Colors.grey)),
                     TextButton(
                       onPressed: () {
-                        // Handle "Sign Up" link action
-                        print('Sign Up link pressed');
-                        // Navigator.push(...)
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => SignupPage())
+                        );
                       },
                       child: const Text('Sign Up', style: TextStyle(color: Colors.orange)),
                     ),

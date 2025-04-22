@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
           SingleChildScrollView(
             padding: const EdgeInsets.all(40.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 50), // Add some initial spacing below the back button
                 const Text(
@@ -73,6 +73,8 @@ class _LoginPageState extends State<LoginPage> {
                     print('Log In pressed');
                     // Navigator.push(...)
                   },
+                  backgroundColor: Color.fromARGB(255, 233, 133, 82),
+                  textColor: Colors.white,
                 ),
                 const SizedBox(height: 20),
                 TextButton(

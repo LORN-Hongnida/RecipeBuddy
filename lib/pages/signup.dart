@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/pages/login.dart';
 import 'package:recipe_app/widget/roundedButton.dart';
 import 'package:recipe_app/widget/customTextField.dart';
 import 'package:recipe_app/widget/backButton.dart';
@@ -64,6 +65,7 @@ class _SignupPageState extends State<SignupPage> {
                   'Date of Birth',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
+                const SizedBox(height: 8),
                 const CustomTextField(
                   hintText: 'DD/MM/YY',
                   keyboardType: TextInputType.datetime,
@@ -97,7 +99,40 @@ class _SignupPageState extends State<SignupPage> {
                       onToggleVisibility: _togglePasswordVisibility,
                   )
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'By continuing, you agree to ',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        print('terms of use: clicked');
+                      },
+                      child: const Text('Terms of Use', style: TextStyle(color: Colors.black)),
+
+                    ),
+                    const Text(
+                        ' and ',
+                        style: TextStyle(color: Colors.grey)
+                    ),
+                    InkWell(
+                      onTap: () {
+                        print('Privacy Policy is clicked.');
+                      },
+                      child: const Text('Privacy Policy.', style: TextStyle(color: Colors.black),),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
                 RoundedButton(
                   text: 'Sign Up',
                   onPressed: () {
@@ -105,48 +140,23 @@ class _SignupPageState extends State<SignupPage> {
                     print('Log In pressed');
                     // Navigator.push(...)
                   },
+                  backgroundColor: Color.fromARGB(255, 233, 133, 82),
+                  textColor: Colors.white,
                 ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {
-                    // Handle Forgot Password? action
-                    print('Forgot Password? pressed');
-                    // Navigator.push(...)
-                  },
-                  child: const Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('or sign up with:', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
+
+
                 const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    IconButton(icon: const Icon(Icons.camera_alt_outlined), onPressed: () {}),
-                    IconButton(icon: const Icon(Icons.mail_outline), onPressed: () {}),
-                    IconButton(icon: const Icon(Icons.facebook), onPressed: () {}),
-                    IconButton(icon: const Icon(Icons.phone), onPressed: () {}),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Don\'t have an account? ', style: TextStyle(color: Colors.grey)),
+                    const Text('Already have an account? ', style: TextStyle(color: Colors.grey)),
                     TextButton(
                       onPressed: () {
-                        // Handle "Sign Up" link action
-                        print('Sign Up link pressed');
-                        // Navigator.push(...)
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => LoginPage()));
                       },
-                      child: const Text('Sign Up', style: TextStyle(color: Colors.orange)),
+                      child: const Text('Log In', style: TextStyle(color: Colors.orange)),
                     ),
                   ],
                 ),

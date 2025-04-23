@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed; // Make this nullable
   final Color? backgroundColor;
   final Color? textColor;
+  final bool isDisabled; // Use a boolean for disabled state
 
   const RoundedButton({
     super.key,
     required this.text,
-    required this.onPressed,
+    this.onPressed, // Make this nullable
     this.backgroundColor,
     this.textColor,
+    this.isDisabled = false, // Default to enabled
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: isDisabled ? null : onPressed, // Disable onPressed if isDisabled is true
       style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor ?? Color.fromARGB(255, 246, 211, 168), // Default color
+        backgroundColor: isDisabled
+            ? Colors.grey // Or your desired disabled color
+            : (backgroundColor ?? const Color.fromARGB(255, 246, 211, 168)),
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
@@ -27,7 +31,12 @@ class RoundedButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 18, color: textColor ?? Color.fromARGB(255, 233, 133, 82)),
+        style: TextStyle(
+          fontSize: 18,
+          color: isDisabled
+              ? Colors.white // Or your desired disabled text color
+              : (textColor ?? const Color.fromARGB(255, 233, 133, 82)),
+        ),
       ),
     );
   }

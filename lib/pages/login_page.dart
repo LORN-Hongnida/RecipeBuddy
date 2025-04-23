@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                const CustomTextField(
+                CustomTextField(
                   hintText: 'example@example.com',
                   keyboardType: TextInputType.emailAddress,
                 ),

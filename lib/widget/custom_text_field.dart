@@ -8,7 +8,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final double hintOpacity;
   final double fillOpacity;
-
+  final controller;
   const CustomTextField({
     super.key,
     this.hintText,
@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.hintOpacity = 0.4,
     this.fillOpacity = 0.5,
+    this.controller,
   });
 
   @override
@@ -32,16 +33,17 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           color: Color.fromARGB(255, 122, 51, 15).withOpacity(hintOpacity),
-          
+
         ),
         suffixIcon: suffixIcon,
       ),
       keyboardType: keyboardType,
+      controller: controller,
       style: TextStyle(
         color: Color.fromARGB(255, 163, 66, 16),
       ),
       obscureText: obscureText,
-      
+
     );
   }
 }

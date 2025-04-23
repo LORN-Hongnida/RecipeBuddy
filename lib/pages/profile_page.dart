@@ -1,54 +1,65 @@
 import 'package:flutter/material.dart';
+import '../widget/custom_bottom_nav.dart'; // Ensure this is created and used
+import 'home_page.dart';
+import 'scan_page.dart';
+import 'category_page.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  int _selectedIndex = 3;
+
+  void _onItemTapped(int index) {
+    if (_selectedIndex == index) return;
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
+        break;
+      case 1:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ScanPage()));
+        break;
+      case 2:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => CategoryPage()));
+        break;
+      case 3:
+        break; // current page
+    }
+  }
+
   final List<Map<String, String>> recipes = [
-    {
-      'title': 'Crispy Shrimp',
-      'desc': 'A feast for the senses',
-      'time': '20min',
-      'likes': '4',
-      'image': 'assets/crispy_shrimp.jpg',
-    },
-    {
-      'title': 'Chicken Wings',
-      'desc': 'Delicious and juicy wings',
-      'time': '30min',
-      'likes': '5',
-      'image': 'assets/chicken_wings.jpg',
-    },
-    {
-      'title': 'Colors Macarons',
-      'desc': 'Sweet bites full of elegance',
-      'time': '40min',
-      'likes': '4',
-      'image': 'assets/color_macarons.jpg',
-    },
-    {
-      'title': 'Pina Colada',
-      'desc': 'A tropical explosion in every sip',
-      'time': '30min',
-      'likes': '4',
-      'image': 'assets/pina_colada.jpg',
-    },
+    {'title': 'Crispy Shrimp', 'desc': 'A feast for the senses', 'time': '20min', 'likes': '4', 'image': 'assets/images/crispy_shrimp.jpg'},
+    {'title': 'Chicken Wings', 'desc': 'Delicious and juicy wings', 'time': '30min', 'likes': '5', 'image': 'assets/images/chicken_wings.jpg'},
+    {'title': 'Colors Macarons', 'desc': 'Sweet bites full of elegance', 'time': '40min', 'likes': '4', 'image': 'assets/images/color_macarons.jpg'},
+    {'title': 'Pina Colada', 'desc': 'A tropical explosion in every sip', 'time': '30min', 'likes': '4', 'image': 'assets/images/pina_colada.jpg'},
   ];
-
-  ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.deepOrange,
-        unselectedItemColor: Colors.grey,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: 3, // Profile tab
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.qr_code_scanner), label: 'Scan'),
-          BottomNavigationBarItem(icon: Icon(Icons.library_books), label: 'Library'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text('Profile', style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
+        leading: const SizedBox(),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_none, color: Colors.orange),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.orange),
+            onPressed: () {},
+          ),
         ],
       ),
       body: SafeArea(
@@ -58,18 +69,16 @@ class ProfilePage extends StatelessWidget {
             ListTile(
               leading: const CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage('assets/profile.jpg'),
+                backgroundImage: AssetImage('assets/images/user.jpg'),
               ),
               title: Text('Dianne Russell',
-                  style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepOrange)),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('@dianne_r', style: TextStyle(color: Colors.grey[600])),
                   const SizedBox(height: 2),
-                  Text('My passion is cooking and sharing new recipes\nwith the world.',
-                      style: TextStyle(fontSize: 13)),
+                  Text('My passion is cooking and sharing new recipes\nwith the world.', style: TextStyle(fontSize: 13)),
                 ],
               ),
               trailing: Row(
@@ -129,6 +138,10 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
     );
   }
 
@@ -150,7 +163,11 @@ class ProfilePage extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       itemCount: items.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 0.72),
+        crossAxisCount: 2,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        childAspectRatio: 0.72,
+      ),
       itemBuilder: (context, index) {
         final item = items[index];
         return Container(
@@ -163,36 +180,38 @@ class ProfilePage extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                child: Image.asset(item['image']!, height: 100, width: double.infinity, fit: BoxFit.cover),
+                child: Image.asset(item['image']!, height: 150, width: double.infinity, fit: BoxFit.cover),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(item['title']!, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    Text(item['desc']!, style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                    const SizedBox(height: 4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.favorite, size: 14, color: Colors.pinkAccent),
-                            const SizedBox(width: 4),
-                            Text(item['likes']!),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.access_time, size: 14, color: Colors.deepOrange),
-                            const SizedBox(width: 4),
-                            Text(item['time']!),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(item['title']!, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text(item['desc']!, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(Icons.favorite, size: 14, color: Colors.pinkAccent),
+                              const SizedBox(width: 4),
+                              Text(item['likes']!),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(Icons.access_time, size: 14, color: Colors.deepOrange),
+                              const SizedBox(width: 4),
+                              Text(item['time']!),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -201,6 +220,7 @@ class ProfilePage extends StatelessWidget {
       },
     );
   }
+
 }
 
 class _StatTile extends StatelessWidget {

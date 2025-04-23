@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "35328388612",
+    "project_id": "scancook-e0ee8",
+    "storage_bucket": "scancook-e0ee8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35328388612:android:4b720bca698de546378f51",
+        "android_client_info": {
+          "package_name": "com.example.recipe_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp3RmLS_il-cZHNrvpdYNT-olq70PZodE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

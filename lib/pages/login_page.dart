@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/widget/rounded_button.dart';
 import 'package:recipe_app/widget/custom_text_field.dart';
 import 'package:recipe_app/widget/back_button.dart';
 import 'package:recipe_app/pages/signup_page.dart';
 import 'package:recipe_app/widget/password_visibility_toggle.dart';
 import 'package:recipe_app/services/auth_service.dart'; // Import AuthService
 import 'package:recipe_app/pages/home_page.dart'; // Import HomePage
-
+import 'package:recipe_app/pages/forgot_password_page.dart';
+import 'package:recipe_app/widget/button_state.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -21,6 +21,24 @@ class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
   bool _isLoggingIn = false;
   String _errorMessage = '';
+  bool _isButtonEnabled = false; // New state to track button enablement
+
+  @override
+  void initState() {
+    super.initState();
+    // Call _updateButtonState initially in case the fields have initial values
+    _updateButtonState();
+    // Add listeners to the text controllers to update the button state
+    _emailController.addListener(_updateButtonState);
+    _passwordController.addListener(_updateButtonState);
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -28,7 +46,18 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  void _updateButtonState() {
+    setState(() {
+      _isButtonEnabled = _emailController.text.trim().isNotEmpty &&
+          _passwordController.text.trim().isNotEmpty;
+    });
+  }
+
   Future<void> _handleLogin() async {
+    if (!_isButtonEnabled || _isLoggingIn) {
+      return; // Prevent login if button is disabled or already logging in
+    }
+
     final String email = _emailController.text.trim();
     final String password = _passwordController.text.trim();
 
@@ -134,20 +163,18 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 const SizedBox(height: 20),
-                RoundedButton(
-                  text: _isLoggingIn ? 'Logging In...' : 'Log In',
-                  onPressed: _isLoggingIn ? null : () => _handleLogin(), // Call _handleLogin
-                  backgroundColor: const Color.fromARGB(255, 233, 133, 82),
-                  textColor: Colors.white,
-                  isDisabled: _isLoggingIn, // Disable button while logging in
+                ButtonState( // Replace with this
+                  text: 'Log In',
+                  isProcessing: _isLoggingIn,
+                  isEnabled: _isButtonEnabled,
+                  onPressed: _handleLogin,
                 ),
                 const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
-                    // Handle Forgot Password? action
-                    print('Forgot Password? pressed');
-                    // Implement forgot password functionality using AuthService
-                    // _authService.sendPasswordResetEmail(_emailController.text.trim());
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => ForgotPasswordPage())
+                    );
                   },
                   child: const Text(
                     'Forgot Password?',

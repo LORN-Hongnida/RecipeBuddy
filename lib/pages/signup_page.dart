@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/pages/login_page.dart';
 import 'package:recipe_app/pages/home_page.dart';
-import 'package:recipe_app/widget/rounded_button.dart';
 import 'package:recipe_app/widget/custom_text_field.dart';
 import 'package:recipe_app/widget/back_button.dart';
 import 'package:recipe_app/widget/password_visibility_toggle.dart';
 import 'package:recipe_app/services/auth_service.dart';
+import 'package:recipe_app/widget/button_state.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -23,6 +23,26 @@ class _SignupPageState extends State<SignupPage> {
   bool _obscureText = true;
   bool _isSigningUp = false;
   String _errorMessage = '';
+  bool _isButtonEnabled = false; // New state for button enablement
+
+  @override
+  void initState() {
+    super.initState();
+    _updateButtonState();
+    _fullNameController.addListener(_updateButtonState);
+    _emailController.addListener(_updateButtonState);
+    _passwordController.addListener(_updateButtonState);
+    _confirmPasswordController.addListener(_updateButtonState);
+  }
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -30,7 +50,20 @@ class _SignupPageState extends State<SignupPage> {
     });
   }
 
+  void _updateButtonState() {
+    setState(() {
+      _isButtonEnabled = _fullNameController.text.trim().isNotEmpty &&
+          _emailController.text.trim().isNotEmpty &&
+          _passwordController.text.trim().isNotEmpty &&
+          _passwordController.text.trim() == _confirmPasswordController.text.trim();
+    });
+  }
+
   Future<void> _handleSignUp() async {
+    if (!_isButtonEnabled || _isSigningUp) {
+      return; // Prevent signup if button is disabled or already signing up
+    }
+
     if (_passwordController.text.trim() != _confirmPasswordController.text.trim()) {
       setState(() {
         _errorMessage = 'Passwords do not match.';
@@ -56,8 +89,6 @@ class _SignupPageState extends State<SignupPage> {
     });
 
     if (errorCode == null) {
-      // Sign up was successful, you likely need to fetch the User object differently now
-      // For example, you can access it via _authService.currentUser if needed immediately after signup.
       print('Successfully signed up');
       if (mounted) {
         Navigator.pushReplacement(
@@ -138,6 +169,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 const SizedBox(height: 8),
                 const CustomTextField(
+                  // No controller needed for Date of Birth if you're not directly using its value for signup
                   hintText: 'DD/MM/YY',
                   keyboardType: TextInputType.datetime,
                 ),
@@ -192,7 +224,6 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 Wrap(
                   alignment: WrapAlignment.center,
-                  // crossAxisAlignment: WrapCrossAxisAlignment.center, // Removed potentially problematic line
                   children: [
                     InkWell(
                       onTap: () {
@@ -213,17 +244,15 @@ class _SignupPageState extends State<SignupPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                RoundedButton(
-                  text: _isSigningUp ? 'Signing Up...' : 'Sign Up',
-                  onPressed: _isSigningUp ? null : _handleSignUp,
-                  backgroundColor: const Color.fromARGB(255, 233, 133, 82),
-                  textColor: Colors.white,
-                  isDisabled: _isSigningUp, // Assuming your RoundedButton has this parameter
+                ButtonState(
+                  text: 'Sign Up',
+                  isProcessing: _isSigningUp,
+                  isEnabled: _isButtonEnabled,
+                  onPressed: _isButtonEnabled && !_isSigningUp ? () => _handleSignUp() : null, // Wrapped in () =>
                 ),
                 const SizedBox(height: 20),
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  crossAxisAlignment: WrapCrossAlignment.center, // Removed potentially problematic line
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text('Already have an account? ', style: TextStyle(color: Colors.grey)),
                     TextButton(

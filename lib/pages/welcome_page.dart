@@ -3,7 +3,7 @@ import 'package:recipe_app/pages/login_page.dart';
 import 'package:recipe_app/widget/rounded_button.dart';
 import 'package:recipe_app/widget/image_card.dart'; // Import the new widget
 import 'package:recipe_app/widget/back_button.dart';
-
+import 'package:recipe_app/pages/profile_page.dart';
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
@@ -30,13 +30,13 @@ class WelcomePage extends StatelessWidget {
                           imageUrl: 'assets/images/korean-fried-chicken.jpg',
                         ),
                         ImageCard(
-                          imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.kG7PLRbcPtrCsDpfPUyEGwHaI0?w=1200&h=1429&rs=1&pid=ImgDetMain',
+                          imageUrl: 'assets/images/waffle.jpg',
                         ),
                         ImageCard(
-                          imageUrl: 'https://tse4.mm.bing.net/th/id/OIP.wVGElzaepMnY_Pfj29QJgwHaLH?rs=1&pid=ImgDetMain',
+                          imageUrl: 'assets/images/wraps.jpg',
                         ),
                         ImageCard(
-                          imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.RwhooZyHtn_haZn-sIsciAHaE8?w=1620&h=1080&rs=1&pid=ImgDetMain',
+                          imageUrl: 'assets/images/lasagna.jpg',
                         ),
                         ImageCard(
                           imageUrl: 'assets/images/Macarons.jpg',
@@ -70,9 +70,8 @@ class WelcomePage extends StatelessWidget {
                 RoundedButton(
                   text: 'I\'m New',
                   onPressed: () {
-                    print('I\'m New pressed');
-                    // Handle "I'm New" action
-                    // Navigator.push(...)
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => ProfilePage()));
                   },
                 ),
                 const SizedBox(height: 10),

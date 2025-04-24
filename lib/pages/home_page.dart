@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import '../services/spoonacular_service.dart';
 import '../models/recipe.dart';
+import 'profile_page.dart';
+import 'category_page.dart';
+import 'scan_page.dart';
+import '../widget/custom_bottom_nav.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     _loadHomePageData();
   }
 
-  Future<void> _loadHomePageData() async {
+  Future<void> _loadHomePageData({String category = ''}) async {
     setState(() {
       _isLoading = true;
       _error = '';
@@ -33,8 +37,8 @@ class _HomePageState extends State<HomePage> {
       final popular = await _spoonacularService.getPopularRecipes(number: 5);
       setState(() {
         _popularRecipes = popular;
-        _yourRecipes = popular;
-        _recentlyAdded = popular;
+        _yourRecipes = popular; // Modify this if you have different data for user recipes
+        _recentlyAdded = popular; // Modify this as well if needed
         _isLoading = false;
       });
     } catch (e) {
@@ -46,27 +50,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onItemTapped(int index) {
+    if (_selectedIndex == index) return;
     setState(() {
       _selectedIndex = index;
-      switch (index) {
-        case 0:
-        // Home action
-          print('Home Tapped');
-          break;
-        case 1:
-        // Filter/Explore action (based on the image)
-          print('Filter Tapped');
-          break;
-        case 2:
-        // Layers/Collections action (based on the image)
-          print('Collections Tapped');
-          break;
-        case 3:
-        // Profile action
-          print('Profile Tapped');
-          break;
-      }
     });
+
+    switch (index) {
+      case 0:
+        break;
+      case 1:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ScanPage()));
+        break;
+      case 2:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => CategoryPage()));
+        break;
+      case 3:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ProfilePage()));
+        break;
+    }
   }
 
   @override
@@ -111,7 +112,8 @@ class _HomePageState extends State<HomePage> {
           : _error.isNotEmpty
           ? Center(child: Text(_error))
           : SingleChildScrollView(
-        padding: const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 80), // Adjust bottom padding for the floating bar
+        padding: const EdgeInsets.only(
+            left: 20, top: 20, right: 20, bottom: 80), // Adjust bottom padding for the floating bar
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -157,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                   return ElevatedButton(
                     onPressed: () {
                       print('$category Tapped');
-                      // Handle category selection (API filtering)
+                      _loadHomePageData(category: category); // Pass the selected category to filter
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFF5F5F5),
@@ -233,50 +235,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.orange, // Match the color from your image
-            borderRadius: BorderRadius.circular(30.0), // Rounded corners
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 10,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0), // Adjust padding for icon spacing
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.home_outlined, color: Colors.white), // Replace with your home icon
-                  onPressed: () => _onItemTapped(0),
-                  color: _selectedIndex == 0 ? Colors.white : Colors.white70,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.document_scanner_outlined, color: Colors.white), // Replace with your filter icon
-                  onPressed: () => _onItemTapped(1),
-                  color: _selectedIndex == 1 ? Colors.white : Colors.white70,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.layers_outlined, color: Colors.white), // Replace with your collections icon
-                  onPressed: () => _onItemTapped(2),
-                  color: _selectedIndex == 2 ? Colors.white : Colors.white70,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.person_outline, color: Colors.white), // Replace with your profile icon
-                  onPressed: () => _onItemTapped(3),
-                  color: _selectedIndex == 3 ? Colors.white : Colors.white70,
-                ),
-              ],
-            ),
-          ),
-        ),
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }
@@ -294,7 +255,8 @@ class _HomePageState extends State<HomePage> {
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
             child: Image.network(
-              recipe.imageUrl ?? 'https://via.placeholder.com/300/E8EAF6/000000?Text=No+Image',
+              recipe.imageUrl ??
+                  'https://via.placeholder.com/300/E8EAF6/000000?Text=No+Image',
               height: 120,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -364,7 +326,8 @@ class _HomePageState extends State<HomePage> {
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
             child: Image.network(
-              recipe.imageUrl ?? 'https://via.placeholder.com/120/E8EAF6/000000?Text=No+Image',
+              recipe.imageUrl ??
+                  'https://via.placeholder.com/120/E8EAF6/000000?Text=No+Image',
               height: 80,
               width: double.infinity,
               fit: BoxFit.cover,

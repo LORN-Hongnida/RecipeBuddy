@@ -4,6 +4,8 @@ import 'package:recipe_app/widget/custom_text_field.dart';
 import 'package:recipe_app/widget/back_button.dart';
 import 'package:recipe_app/pages/signup_page.dart';
 import 'package:recipe_app/widget/password_visibility_toggle.dart';
+import 'package:recipe_app/services/auth_service.dart'; // Import AuthService
+import 'package:recipe_app/pages/home_page.dart'; // Import HomePage
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,12 +15,66 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AuthService _authService = AuthService(); // Instance of AuthService
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
+  bool _isLoggingIn = false;
+  String _errorMessage = '';
 
   void _togglePasswordVisibility() {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  Future<void> _handleLogin() async {
+    final String email = _emailController.text.trim();
+    final String password = _passwordController.text.trim();
+
+    setState(() {
+      _isLoggingIn = true;
+      _errorMessage = '';
+    });
+
+    final String? errorCode = await _authService.signInWithEmailAndPassword( // Get the error code
+      email,
+      password,
+    );
+
+    setState(() {
+      _isLoggingIn = false;
+    });
+
+    if (errorCode == null) {
+      // Login successful
+      print('Successfully logged in');
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      }
+    } else {
+      // String errorMessage = 'Login failed. Please check your email and password.';
+      String errorMessage = '';
+      switch (errorCode) {
+        case 'invalid-email':
+          errorMessage = 'Please enter a valid email address.';
+        case 'invalid-credential':
+          errorMessage = 'Incorrect email or password.';
+          break;
+        case 'sign-in-failed':
+          errorMessage = 'An unexpected error occurred during login.';
+          break;
+        default:
+          errorMessage = 'Login failed: $errorCode'; // Display the raw error code for debugging
+          break;
+      }
+      setState(() {
+        _errorMessage = errorMessage;
+      });
+    }
   }
 
   @override
@@ -31,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 50), // Add some initial spacing below the back button
+                const SizedBox(height: 50),
                 const Text(
                   'Login',
                   style: TextStyle(
@@ -48,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 8),
                 CustomTextField(
+                  controller: _emailController, // Added controller
                   hintText: 'example@example.com',
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -58,30 +115,39 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 8),
                 CustomTextField(
+                  controller: _passwordController, // Added controller
                   hintText: '••••••••',
                   obscureText: _obscureText,
                   suffixIcon: PasswordVisibilityToggle(
                     isVisible: !_obscureText,
                     onToggleVisibility: _togglePasswordVisibility,
-                  )
+                  ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 10),
+                if (_errorMessage.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: Text(
+                      _errorMessage,
+                      style: const TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                const SizedBox(height: 20),
                 RoundedButton(
-                  text: 'Log In',
-                  onPressed: () {
-                    // Handle Log In action
-                    print('Log In pressed');
-                    // Navigator.push(...)
-                  },
-                  backgroundColor: Color.fromARGB(255, 233, 133, 82),
+                  text: _isLoggingIn ? 'Logging In...' : 'Log In',
+                  onPressed: _isLoggingIn ? null : () => _handleLogin(), // Call _handleLogin
+                  backgroundColor: const Color.fromARGB(255, 233, 133, 82),
                   textColor: Colors.white,
+                  isDisabled: _isLoggingIn, // Disable button while logging in
                 ),
                 const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
                     // Handle Forgot Password? action
                     print('Forgot Password? pressed');
-                    // Navigator.push(...)
+                    // Implement forgot password functionality using AuthService
+                    // _authService.sendPasswordResetEmail(_emailController.text.trim());
                   },
                   child: const Text(
                     'Forgot Password?',
@@ -89,10 +155,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('or sign up with:', style: TextStyle(color: Colors.grey)),
+                    Text('or sign up with:', style: TextStyle(color: Colors.grey)),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -113,8 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextButton(
                       onPressed: () {
                         Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => SignupPage())
-                        );
+                            context, MaterialPageRoute(builder: (context) => const SignupPage()));
                       },
                       child: const Text('Sign Up', style: TextStyle(color: Colors.orange)),
                     ),
@@ -123,8 +188,12 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          const BackButtonOverlay( // Or your desired color
-          ),
+          const BackButtonOverlay(),
+          if (_isLoggingIn)
+            ModalBarrier(
+              color: Colors.black.withOpacity(0.5),
+              dismissible: false,
+            ),
         ],
       ),
     );

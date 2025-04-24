@@ -27,7 +27,7 @@ class WelcomePage extends StatelessWidget {
                       childAspectRatio: 1.2,
                       children: [
                         ImageCard(
-                          imageUrl: 'https://bosskitchen.com/wp-content/uploads/2021/08/korean-fried-chicken-recipe.jpg',
+                          imageUrl: 'assets/images/korean-fried-chicken.jpg',
                         ),
                         ImageCard(
                           imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.kG7PLRbcPtrCsDpfPUyEGwHaI0?w=1200&h=1429&rs=1&pid=ImgDetMain',
@@ -39,10 +39,10 @@ class WelcomePage extends StatelessWidget {
                           imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.RwhooZyHtn_haZn-sIsciAHaE8?w=1620&h=1080&rs=1&pid=ImgDetMain',
                         ),
                         ImageCard(
-                          imageUrl: 'https://lovefoodfeed.com/wp-content/uploads/2023/01/Macarons-px-1200-01-1-1024x1024.jpg',
+                          imageUrl: 'assets/images/Macarons.jpg',
                         ),
                         ImageCard(
-                          imageUrl: 'https://cocktailflavors.com/wp-content/uploads/2024/03/pisco-mojito-cocktail-recipe_001-683x1024.png',
+                          imageUrl: 'assets/images/mojito.webp',
                         ),
                       ],
                     ),

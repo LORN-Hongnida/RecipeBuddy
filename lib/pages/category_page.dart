@@ -3,6 +3,7 @@ import '../widget/custom_bottom_nav.dart'; // Make sure this is created
 import 'home_page.dart';
 import 'scan_page.dart';
 import 'profile_page.dart';
+import 'breakfast_page.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
@@ -83,7 +84,12 @@ class _CategoryPageState extends State<CategoryPage> {
             final category = categories[index];
             return GestureDetector(
               onTap: () {
-                // TODO: Handle category tap
+                if (category['title'] == 'Breakfast') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const BreakfastPage()),
+                  );
+                }
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -122,6 +128,7 @@ class _CategoryPageState extends State<CategoryPage> {
               ),
             );
           },
+
         ),
       ),
       bottomNavigationBar: CustomBottomNavBar(

@@ -61,7 +61,7 @@ class _SignupPageState extends State<SignupPage> {
 
   Future<void> _handleSignUp() async {
     if (!_isButtonEnabled || _isSigningUp) {
-      return; // Prevent signup if button is disabled or already signing up
+      return;
     }
 
     if (_passwordController.text.trim() != _confirmPasswordController.text.trim()) {
@@ -71,6 +71,7 @@ class _SignupPageState extends State<SignupPage> {
       return;
     }
 
+    final String fullName = _fullNameController.text.trim();
     final String email = _emailController.text.trim();
     final String password = _passwordController.text.trim();
 
@@ -79,7 +80,8 @@ class _SignupPageState extends State<SignupPage> {
       _errorMessage = '';
     });
 
-    final String? errorCode = await _authService.signUpWithEmailAndPassword( // Changed the type here
+    final String? errorCode = await _authService.signUpWithEmailAndPassword(
+      fullName,
       email,
       password,
     );
@@ -112,7 +114,7 @@ class _SignupPageState extends State<SignupPage> {
           errorMessage = 'An unexpected error occurred during sign up.';
           break;
         default:
-          errorMessage = 'Sign up failed: $errorCode'; // Display the raw error code for debugging
+          errorMessage = 'Sign up failed: $errorCode';
           break;
       }
       setState(() {
@@ -164,17 +166,6 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  'Date of Birth',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                const CustomTextField(
-                  // No controller needed for Date of Birth if you're not directly using its value for signup
-                  hintText: 'DD/MM/YY',
-                  keyboardType: TextInputType.datetime,
-                ),
-                const SizedBox(height: 10),
-                const Text(
                   'Password',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -213,42 +204,11 @@ class _SignupPageState extends State<SignupPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'By continuing, you agree to ',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        print('terms of use: clicked');
-                      },
-                      child: const Text('Terms of Use', style: TextStyle(color: Colors.black)),
-                    ),
-                    const Text(' and ', style: TextStyle(color: Colors.grey)),
-                    InkWell(
-                      onTap: () {
-                        print('Privacy Policy is clicked.');
-                      },
-                      child: const Text(
-                        'Privacy Policy.',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
                 ButtonState(
                   text: 'Sign Up',
                   isProcessing: _isSigningUp,
                   isEnabled: _isButtonEnabled,
-                  onPressed: _isButtonEnabled && !_isSigningUp ? () => _handleSignUp() : null, // Wrapped in () =>
+                  onPressed: _isButtonEnabled && !_isSigningUp ? () => _handleSignUp() : null,
                 ),
                 const SizedBox(height: 20),
                 Row(

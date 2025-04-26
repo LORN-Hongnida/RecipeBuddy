@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../widget/custom_bottom_nav.dart'; // Ensure this is created and used
+import '../widget/custom_bottom_nav.dart';
 import 'home_page.dart';
 import 'scan_page.dart';
 import 'category_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart'; // <-- USE Realtime Database
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -12,7 +14,39 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String? userName;
+  String? userUsername;
+  String? userBio;
+  String? userImageUrl;
+  bool isNewUser = false; // Track if it's a new user
+
   int _selectedIndex = 3;
+
+  @override
+  void initState() {
+    super.initState();
+    _listenToUserData(); // Live listen user profile changes
+  }
+
+  void _listenToUserData() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final userRef = FirebaseDatabase.instance.ref('users/${user.uid}');
+      userRef.onValue.listen((DatabaseEvent event) {
+        final snapshot = event.snapshot;
+        if (snapshot.exists) {
+          final data = snapshot.value as Map<dynamic, dynamic>;
+          setState(() {
+            userName = data['name'];
+            userUsername = data['username'];
+            userBio = data['bio'];
+            userImageUrl = data['profileImageUrl'];
+            isNewUser = data['recipes'] == null || data['favorites'] == null; // If no recipes or favorites, treat as new user
+          });
+        }
+      });
+    }
+  }
 
   void _onItemTapped(int index) {
     if (_selectedIndex == index) return;
@@ -31,16 +65,9 @@ class _ProfilePageState extends State<ProfilePage> {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => CategoryPage()));
         break;
       case 3:
-        break; // current page
+        break;
     }
   }
-
-  final List<Map<String, String>> recipes = [
-    {'title': 'Crispy Shrimp', 'desc': 'A feast for the senses', 'time': '20min', 'likes': '4', 'image': 'assets/images/crispy_shrimp.jpg'},
-    {'title': 'Chicken Wings', 'desc': 'Delicious and juicy wings', 'time': '30min', 'likes': '5', 'image': 'assets/images/chicken_wings.jpg'},
-    {'title': 'Colors Macarons', 'desc': 'Sweet bites full of elegance', 'time': '40min', 'likes': '4', 'image': 'assets/images/color_macarons.jpg'},
-    {'title': 'Pina Colada', 'desc': 'A tropical explosion in every sip', 'time': '30min', 'likes': '4', 'image': 'assets/images/pina_colada.jpg'},
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -67,18 +94,25 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             const SizedBox(height: 10),
             ListTile(
-              leading: const CircleAvatar(
+              leading: CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage('assets/images/user.jpg'),
+                backgroundImage: userImageUrl != null
+                    ? NetworkImage(userImageUrl!)
+                    : const AssetImage('assets/images/user.jpg') as ImageProvider,
               ),
-              title: Text('Dianne Russell',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+              title: Text(
+                userName ?? 'Loading...',
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepOrange),
+              ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('@dianne_r', style: TextStyle(color: Colors.grey[600])),
+                  Text('@${userUsername ?? 'loading'}', style: TextStyle(color: Colors.grey[600])),
                   const SizedBox(height: 2),
-                  Text('My passion is cooking and sharing new recipes\nwith the world.', style: TextStyle(fontSize: 13)),
+                  Text(
+                    userBio ?? 'Loading bio...',
+                    style: const TextStyle(fontSize: 13),
+                  ),
                 ],
               ),
               trailing: Row(
@@ -90,6 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -100,14 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                _StatTile(label: 'recipes', value: '60'),
-                _StatTile(label: 'Following', value: '120'),
-                _StatTile(label: 'Followers', value: '250'),
-              ],
-            ),
+            // Removed Following and Followers stats
             const SizedBox(height: 10),
             Expanded(
               child: DefaultTabController(
@@ -126,8 +154,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          _buildGrid(recipes),
-                          _buildGrid(recipes.reversed.toList()),
+                          isNewUser ? _buildNoContentSection() : _buildGrid([]), // New user content placeholder
+                          isNewUser ? _buildNoContentSection() : _buildGrid([]), // New user content placeholder
                         ],
                       ),
                     ),
@@ -221,20 +249,13 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-}
-
-class _StatTile extends StatelessWidget {
-  final String label;
-  final String value;
-  const _StatTile({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-        Text(label, style: TextStyle(color: Colors.grey[600])),
-      ],
+  static Widget _buildNoContentSection() {
+    return Center(
+      child: Text(
+        'No content available yet.',
+        style: TextStyle(color: Colors.grey[600], fontSize: 16),
+      ),
     );
   }
 }
+

@@ -48,6 +48,7 @@ class DefaultFirebaseOptions {
     authDomain: 'scancook-e0ee8.firebaseapp.com',
     storageBucket: 'scancook-e0ee8.firebasestorage.app',
     measurementId: 'G-P8KK1PLJP5',
+    databaseURL: 'https://scancook-e0ee8-default-rtdb.firebaseio.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -56,6 +57,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '35328388612',
     projectId: 'scancook-e0ee8',
     storageBucket: 'scancook-e0ee8.firebasestorage.app',
+    databaseURL: 'https://scancook-e0ee8-default-rtdb.firebaseio.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -65,6 +67,7 @@ class DefaultFirebaseOptions {
     projectId: 'scancook-e0ee8',
     storageBucket: 'scancook-e0ee8.firebasestorage.app',
     iosBundleId: 'com.example.recipeApp',
+    databaseURL: 'https://scancook-e0ee8-default-rtdb.firebaseio.com',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -74,6 +77,7 @@ class DefaultFirebaseOptions {
     projectId: 'scancook-e0ee8',
     storageBucket: 'scancook-e0ee8.firebasestorage.app',
     iosBundleId: 'com.example.recipeApp',
+    databaseURL: 'https://scancook-e0ee8-default-rtdb.firebaseio.com',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
@@ -84,5 +88,6 @@ class DefaultFirebaseOptions {
     authDomain: 'scancook-e0ee8.firebaseapp.com',
     storageBucket: 'scancook-e0ee8.firebasestorage.app',
     measurementId: 'G-JSD7NBMB77',
+    databaseURL: 'https://scancook-e0ee8-default-rtdb.firebaseio.com',
   );
 }

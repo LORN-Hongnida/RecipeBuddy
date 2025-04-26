@@ -16,6 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final AuthService _authService = AuthService(); // Instance of AuthService
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
@@ -29,12 +30,14 @@ class _LoginPageState extends State<LoginPage> {
     // Call _updateButtonState initially in case the fields have initial values
     _updateButtonState();
     // Add listeners to the text controllers to update the button state
+    _fullNameController.addListener(_updateButtonState);
     _emailController.addListener(_updateButtonState);
     _passwordController.addListener(_updateButtonState);
   }
 
   @override
   void dispose() {
+    _fullNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -60,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
 
     final String email = _emailController.text.trim();
     final String password = _passwordController.text.trim();
+    final String fullName = _fullNameController.text.trim();
 
     setState(() {
       _isLoggingIn = true;

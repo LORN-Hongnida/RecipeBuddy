@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widget/custom_bottom_nav.dart';
 import 'home_page.dart';
-import 'scan_page.dart';
+import 'ingredient_input_page.dart';
 import 'profile_page.dart';
 import 'category_food_page.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -62,7 +62,7 @@ class _CategoryPageState extends State<CategoryPage> {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()));
         break;
       case 1:
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const ScanPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => IngredientInputPage()));
         break;
       case 2:
         break; // Current page

@@ -3,7 +3,7 @@ import '../services/spoonacular_service.dart';
 import '../models/recipe.dart';
 import 'profile_page.dart';
 import 'category_page.dart';
-import 'scan_page.dart';
+import 'ingredient_input_page.dart';
 import '../widget/custom_bottom_nav.dart';
 
 class HomePage extends StatefulWidget {
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
       case 0:
         break;
       case 1:
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ScanPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => IngredientInputPage()));
         break;
       case 2:
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => CategoryPage()));

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../pages/home_page.dart';
 import '../pages/category_page.dart';
 import '../pages/profile_page.dart';
-import '../pages/scan_page.dart';
+import '../pages/ingredient_input_page.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   final int selectedIndex;
@@ -33,7 +33,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ScanPage()),
+          MaterialPageRoute(builder: (context) => IngredientInputPage()),
         );
         break;
       case 2:

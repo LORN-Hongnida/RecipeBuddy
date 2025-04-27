@@ -111,7 +111,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
           isLoading = false;
         });
       } else {
-        debugPrint('No recipe found: ${widget.categoryName}/${widget.recipeId}');
+        debugPrint('No recipe found: ${widget.categoryName}/${widget.categoryName}/${widget.recipeId}');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Recipe not found')),
         );

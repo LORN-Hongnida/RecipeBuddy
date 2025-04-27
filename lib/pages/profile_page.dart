@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../widget/custom_bottom_nav.dart';
 import 'home_page.dart';
-import 'scan_page.dart';
+import 'ingredient_input_page.dart';
 import 'category_page.dart';
 import 'recipe_detail_page.dart';
 import 'login_page.dart';
@@ -127,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()));
         break;
       case 1:
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const ScanPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => IngredientInputPage()));
         break;
       case 2:
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const CategoryPage()));
@@ -214,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
           style: TextStyle(
             color: Colors.orange,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 21,
           ),
         ),
         leading: const SizedBox(), // Back icon already removed

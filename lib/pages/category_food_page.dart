@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'recipe_detail_page.dart';
 import '../widget/notification_widget.dart';
+import '../widget/search_widget.dart';
 
 class CategoryFoodPage extends StatelessWidget {
   final String categoryTitle;
@@ -47,10 +48,7 @@ class CategoryFoodPage extends StatelessWidget {
         centerTitle: true,
         actions: [
           const NotificationWidget(),
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.orange),
-            onPressed: () {},
-          ),
+          const SearchWidget(),
         ],
       ),
       body: Padding(

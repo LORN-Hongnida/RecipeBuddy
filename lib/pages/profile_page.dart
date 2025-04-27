@@ -11,6 +11,7 @@ import 'signup_page.dart';
 import 'edit_profile_page.dart';
 import 'share_profile_page.dart';
 import '../widget/notification_widget.dart';
+import '../widget/search_widget.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -219,10 +220,7 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: const SizedBox(), // Back icon already removed
         actions: [
           const NotificationWidget(),
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.orange),
-            onPressed: () {},
-          ),
+          const SearchWidget(),
           if (isLoggedIn)
             IconButton(
               icon: const Icon(Icons.logout, color: Colors.orange),

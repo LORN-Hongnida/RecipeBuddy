@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RecipeDetailPage extends StatefulWidget {
   final String categoryName;
-  final String recipeId; // recipeId could be title, or an actual ID
+  final String recipeId; // recipeId is unique within category
 
   const RecipeDetailPage({
     super.key,
@@ -20,38 +21,109 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
   List<String> ingredients = [];
   List<String> steps = [];
   bool isLoading = true;
+  bool isFavorite = false; // Track if recipe is favorited
 
   @override
   void initState() {
     super.initState();
+    debugPrint('RecipeDetailPage: categoryName=${widget.categoryName}, recipeId=${widget.recipeId}');
     fetchRecipeDetails();
+    checkFavoriteStatus();
+  }
+
+  // Check if the recipe is in the user's favorites
+  Future<void> checkFavoriteStatus() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final favoriteId = '${widget.categoryName}_${widget.recipeId}';
+      final ref = FirebaseDatabase.instance.ref('users/${user.uid}/favorites/$favoriteId');
+      final snapshot = await ref.get();
+      if (snapshot.exists) {
+        setState(() {
+          isFavorite = true;
+        });
+      }
+    }
+  }
+
+  // Toggle favorite status
+  Future<void> toggleFavorite() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please log in to add to favorites')),
+      );
+      return;
+    }
+
+    final favoriteId = '${widget.categoryName}_${widget.recipeId}';
+    final ref = FirebaseDatabase.instance.ref('users/${user.uid}/favorites/$favoriteId');
+    try {
+      if (isFavorite) {
+        // Remove from favorites
+        await ref.remove();
+        setState(() {
+          isFavorite = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Removed from favorites')),
+        );
+      } else {
+        // Add to favorites
+        await ref.set({
+          'categoryName': widget.categoryName,
+          'recipeId': widget.recipeId,
+          'favoriteId': favoriteId,
+          'title': recipeData?['title'] ?? '',
+          'image': recipeData?['image'] ?? '',
+          'time': recipeData?['time'] ?? '',
+          'likes': recipeData?['likes'] ?? 0,
+          'desc': recipeData?['desc'] ?? '',
+        });
+        debugPrint('Added favorite: $favoriteId, category=${widget.categoryName}, recipeId=${widget.recipeId}');
+        setState(() {
+          isFavorite = true;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Added to favorites')),
+        );
+      }
+    } catch (e) {
+      debugPrint('Error toggling favorite: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error updating favorites')),
+      );
+    }
   }
 
   Future<void> fetchRecipeDetails() async {
     try {
-      final ref = FirebaseDatabase.instance.ref('categories/${widget.categoryName}/${widget.recipeId}'); // Fetch by ID
+      final ref = FirebaseDatabase.instance.ref('categories/${widget.categoryName}/${widget.recipeId}');
       final snapshot = await ref.get();
 
       if (snapshot.exists) {
         final data = Map<String, dynamic>.from(snapshot.value as Map);
-
         recipeData = data;
         ingredients = List<String>.from(data['ingredients'] ?? []);
         steps = List<String>.from(data['steps'] ?? []);
-
         debugPrint('Fetched recipe: $recipeData');
-
         setState(() {
           isLoading = false;
         });
       } else {
-        debugPrint('No recipe found with ID: ${widget.recipeId}');
+        debugPrint('No recipe found: ${widget.categoryName}/${widget.recipeId}');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Recipe not found')),
+        );
         setState(() {
           isLoading = false;
         });
       }
     } catch (e) {
       debugPrint('Error fetching recipe: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error loading recipe')),
+      );
       setState(() {
         isLoading = false;
       });
@@ -74,8 +146,17 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
         ),
         centerTitle: true,
         actions: [
-          IconButton(icon: const Icon(Icons.share, color: Colors.orange), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.favorite_border, color: Colors.orange), onPressed: () {}),
+          IconButton(
+            icon: const Icon(Icons.share, color: Colors.orange),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: Colors.orange,
+            ),
+            onPressed: toggleFavorite,
+          ),
         ],
       ),
       body: isLoading
@@ -112,7 +193,6 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
               ),
             ),
             const SizedBox(height: 16),
-
             // Title
             Text(
               recipeData?['title'] ?? '',
@@ -123,7 +203,6 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
               ),
             ),
             const SizedBox(height: 8),
-
             // Time & Rating
             Row(
               children: [
@@ -143,7 +222,6 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
               ],
             ),
             const SizedBox(height: 24),
-
             // Details Section
             const Text(
               "Details",
@@ -187,9 +265,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                   ],
                 ),
               )),
-
             const SizedBox(height: 24),
-
             // Instructions
             const Text(
               "Instructions",

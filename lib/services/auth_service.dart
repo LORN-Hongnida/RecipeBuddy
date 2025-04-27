@@ -88,7 +88,6 @@ class AuthService {
         'name': displayName,
         'username': generatedUsername,
         'bio': 'This is my bio!',
-        'profileImageUrl': 'https://i.pinimg.com/736x/0a/2f/68/0a2f68448ab64c7fb67e75ef410de163.jpg',
         'createdAt': DateTime.now().toIso8601String(),
       });
 

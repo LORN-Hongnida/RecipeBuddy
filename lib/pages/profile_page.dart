@@ -8,6 +8,7 @@ import 'category_page.dart';
 import 'recipe_detail_page.dart';
 import 'login_page.dart';
 import 'signup_page.dart';
+import 'edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -141,8 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _handleEditProfile() {
-    // Implement the edit profile functionality
-    // For example: Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfilePage()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const EditProfilePage()));
   }
 
   void _handleShareProfile() {
@@ -248,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         CircleAvatar(
                           radius: 50,
-                          backgroundColor: Colors.orange.shade50,
+                          // backgroundColor: Colors.orange.shade50,
                           backgroundImage: userImageUrl != null && userImageUrl!.isNotEmpty
                               ? NetworkImage(userImageUrl!)
                               : const AssetImage('assets/images/user.jpg') as ImageProvider,

@@ -147,10 +147,6 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.share, color: Colors.orange),
-            onPressed: () {},
-          ),
-          IconButton(
             icon: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
               color: Colors.orange,

@@ -9,6 +9,8 @@ import 'recipe_detail_page.dart';
 import 'login_page.dart';
 import 'signup_page.dart';
 import 'edit_profile_page.dart';
+import 'share_profile_page.dart';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -146,7 +148,18 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _handleShareProfile() {
-    // Implement share profile functionality
+    if (userUsername != null && userUsername!.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ShareProfilePage(username: userUsername!),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Username not available. Please set a username first.')),
+      );
+    }
   }
 
   void _handleLogout() {

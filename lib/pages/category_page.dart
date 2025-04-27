@@ -5,6 +5,7 @@ import 'scan_page.dart';
 import 'profile_page.dart';
 import 'category_food_page.dart';
 import 'package:firebase_database/firebase_database.dart';
+import '../widget/notification_widget.dart';
 
 Future<List<Map<String, String>>> fetchFoodItems(String category) async {
   final DatabaseReference ref = FirebaseDatabase.instance.ref('categories/$category');
@@ -94,10 +95,7 @@ class _CategoryPageState extends State<CategoryPage> {
         ),
         leading: const SizedBox(),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_none, color: Colors.orange),
-            onPressed: () {},
-          ),
+          const NotificationWidget(),
           IconButton(
             icon: const Icon(Icons.search, color: Colors.orange),
             onPressed: () {},

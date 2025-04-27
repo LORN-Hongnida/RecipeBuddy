@@ -10,6 +10,7 @@ import 'login_page.dart';
 import 'signup_page.dart';
 import 'edit_profile_page.dart';
 import 'share_profile_page.dart';
+import '../widget/notification_widget.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -217,10 +218,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         leading: const SizedBox(), // Back icon already removed
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_none, color: Colors.orange),
-            onPressed: () {},
-          ),
+          const NotificationWidget(),
           IconButton(
             icon: const Icon(Icons.search, color: Colors.orange),
             onPressed: () {},

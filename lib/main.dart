@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:recipe_app/pages/ingredient_input_page.dart';
+import 'package:recipe_app/pages/login_page.dart';
 import '/pages/home_page.dart';
 import 'firebase_options.dart'; // Import the generated firebase_options.dart file
 import 'pages/splash_screen.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: SplashScreen(),
+      home: HomePage(),
     );
   }
 }

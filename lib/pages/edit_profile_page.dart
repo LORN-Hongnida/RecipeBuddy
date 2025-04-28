@@ -225,13 +225,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
         title: const Text(
           'Edit Profile',
           style: TextStyle(
-            color: Colors.orange,
+            color: Color.fromARGB(255, 255, 108, 67),
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.orange),
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 108, 67)),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -250,7 +250,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     children: [
                       CircleAvatar(
                         radius: 50,
-                        // backgroundColor: Colors.orange.shade50,
+                        // backgroundColor: Color.fromARGB(255, 255, 108, 67).shade50,
                         backgroundImage:
                         userImageUrl != null && userImageUrl!.isNotEmpty
                             ? NetworkImage(userImageUrl!)
@@ -270,7 +270,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           child: Container(
                             padding: const EdgeInsets.all(4),
                             decoration: const BoxDecoration(
-                              color: Colors.orange,
+                              color: Color.fromARGB(255, 255, 108, 67),
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
@@ -294,11 +294,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.orange.withOpacity(0.5)),
+                      borderSide: BorderSide(color: Color.fromARGB(255, 255, 108, 67).withOpacity(0.5)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.orange),
+                      borderSide: const BorderSide(color: Color.fromARGB(255, 255, 108, 67)),
                     ),
                   ),
                   validator: (value) {
@@ -318,11 +318,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.orange.withOpacity(0.5)),
+                      borderSide: BorderSide(color: Color.fromARGB(255, 255, 108, 67).withOpacity(0.5)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.orange),
+                      borderSide: const BorderSide(color: Color.fromARGB(255, 255, 108, 67)),
                     ),
                     prefixText: '@',
                   ),
@@ -346,11 +346,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.orange.withOpacity(0.5)),
+                      borderSide: BorderSide(color: Color.fromARGB(255, 255, 108, 67).withOpacity(0.5)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.orange),
+                      borderSide: const BorderSide(color: Color.fromARGB(255, 255, 108, 67)),
                     ),
                   ),
                   maxLines: 3,
@@ -363,7 +363,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   onPressed: _isLoading ? null : _saveProfile,
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Color.fromARGB(255, 255, 108, 67),
                     padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
@@ -390,7 +390,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
           ),
         )
-            : const Center(child: CircularProgressIndicator(color: Colors.orange)),
+            : const Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 255, 108, 67))),
       ),
     );
   }

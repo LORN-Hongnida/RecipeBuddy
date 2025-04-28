@@ -134,7 +134,7 @@ class _SearchPageState extends State<SearchPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.orange),
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 108, 67)),
           onPressed: () => Navigator.pop(context),
         ),
         title: Autocomplete<String>(
@@ -204,7 +204,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: SafeArea(
         child: isLoading
-            ? const Center(child: CircularProgressIndicator(color: Colors.orange))
+            ? const Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 255, 108, 67)))
             : allRecipes.isEmpty
             ? const Center(
           child: Column(
@@ -213,7 +213,7 @@ class _SearchPageState extends State<SearchPage> {
               Icon(
                 Icons.error_outline,
                 size: 60,
-                color: Colors.orange,
+                color: Color.fromARGB(255, 255, 108, 67),
               ),
               SizedBox(height: 16),
               Text(
@@ -232,7 +232,7 @@ class _SearchPageState extends State<SearchPage> {
               Icon(
                 Icons.search_off,
                 size: 60,
-                color: Colors.orange,
+                color: Color.fromARGB(255, 255, 108, 67),
               ),
               SizedBox(height: 16),
               Text(

@@ -137,26 +137,26 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.orange),
+          icon: const Icon(Icons.arrow_back_ios_new, color: Color.fromARGB(255, 255, 108, 67)),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           recipeData?['title'] ?? 'Recipe',
-          style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+          style: const TextStyle(color: Color.fromARGB(255, 255, 108, 67), fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         actions: [
           IconButton(
             icon: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: Colors.orange,
+              color: Color.fromARGB(255, 255, 108, 67),
             ),
             onPressed: toggleFavorite,
           ),
         ],
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator(color: Colors.orange))
+          ? const Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 255, 108, 67)))
           : recipeData == null
           ? const Center(child: Text("Recipe not found.", style: TextStyle(color: Colors.black54)))
           : SingleChildScrollView(
@@ -195,7 +195,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 26,
-                color: Colors.orange,
+                color: Color.fromARGB(255, 255, 108, 67),
               ),
             ),
             const SizedBox(height: 8),
@@ -224,7 +224,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
-                color: Colors.orange,
+                color: Color.fromARGB(255, 255, 108, 67),
               ),
             ),
             const SizedBox(height: 8),
@@ -239,7 +239,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
-                color: Colors.orange,
+                color: Color.fromARGB(255, 255, 108, 67),
               ),
             ),
             const SizedBox(height: 8),
@@ -250,7 +250,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle_outline, color: Colors.orange, size: 18),
+                    const Icon(Icons.check_circle_outline, color: Color.fromARGB(255, 255, 108, 67), size: 18),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -268,7 +268,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
-                color: Colors.orange,
+                color: Color.fromARGB(255, 255, 108, 67),
               ),
             ),
             const SizedBox(height: 8),
@@ -286,7 +286,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.orange.withOpacity(0.5),
+                        color: Color.fromARGB(255, 255, 108, 67).withOpacity(0.5),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),

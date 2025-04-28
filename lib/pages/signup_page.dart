@@ -135,7 +135,7 @@ class _SignupPageState extends State<SignupPage> {
               children: [
                 const SizedBox(height: 50),
                 const Text(
-                  'Signup',
+                  'Sign Up',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -220,14 +220,13 @@ class _SignupPageState extends State<SignupPage> {
                         Navigator.push(
                             context, MaterialPageRoute(builder: (context) => const LoginPage()));
                       },
-                      child: const Text('Log In', style: TextStyle(color: Colors.orange)),
+                      child: const Text('Log In', style: TextStyle(color: Color.fromARGB(255, 255, 108, 67))),
                     ),
                   ],
                 ),
               ],
             ),
           ),
-          const BackButtonOverlay(),
           if (_isSigningUp)
             ModalBarrier(
               color: Colors.black.withOpacity(0.5),

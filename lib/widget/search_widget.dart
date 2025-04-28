@@ -7,7 +7,7 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.search, color: Colors.orange),
+      icon: const Icon(Icons.search, color: Color.fromARGB(255, 255, 108, 67)),
       onPressed: () {
         Navigator.push(
           context,

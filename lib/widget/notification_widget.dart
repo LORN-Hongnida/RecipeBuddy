@@ -50,7 +50,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
     return Stack(
       children: [
         IconButton(
-          icon: const Icon(Icons.notifications_none, color: Colors.orange),
+          icon: const Icon(Icons.notifications_none, color: Color.fromARGB(255, 255, 108, 67)),
           onPressed: () {
             Navigator.push(
               context,

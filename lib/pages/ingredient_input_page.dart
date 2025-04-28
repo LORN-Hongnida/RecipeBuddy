@@ -198,7 +198,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> with SingleTi
             title: const Text(
               'Recipe Finder',
               style: TextStyle(
-                color: Colors.orange,
+                color: Color.fromARGB(255, 255, 108, 67),
                 fontWeight: FontWeight.bold,
                 fontSize: 21,
               ),
@@ -232,7 +232,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> with SingleTi
                       decoration: InputDecoration(
                         hintText: 'What ingredient do you have?',
                         hintStyle: TextStyle(color: Colors.grey.shade500),
-                        prefixIcon: Icon(Icons.food_bank_outlined, color: Colors.orange),
+                        prefixIcon: Icon(Icons.food_bank_outlined, color: Color.fromARGB(255, 255, 108, 67)),
                         suffixIcon: Container(
                           margin: const EdgeInsets.all(8),
                           child: ElevatedButton(
@@ -244,7 +244,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> with SingleTi
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.deepOrangeAccent,
+                              backgroundColor: Colors.orange,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -728,7 +728,7 @@ class _IngredientInputPageState extends State<IngredientInputPage> with SingleTi
                                               20),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Colors.amber.withOpacity(
+                                              color: Colors.deepOrangeAccent.withOpacity(
                                                   0.1),
                                               blurRadius: 10,
                                             ),

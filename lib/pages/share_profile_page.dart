@@ -21,13 +21,13 @@ class ShareProfilePage extends StatelessWidget {
         title: const Text(
           'Share Profile',
           style: TextStyle(
-            color: Colors.orange,
+            color: Color.fromARGB(255, 255, 108, 67),
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.orange),
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 108, 67)),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -42,7 +42,7 @@ class ShareProfilePage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.orange,
+                  color: Color.fromARGB(255, 255, 108, 67),
                 ),
               ),
               const SizedBox(height: 20),
@@ -65,7 +65,7 @@ class ShareProfilePage extends StatelessWidget {
                   data: qrData,
                   version: QrVersions.auto,
                   size: 200.0,
-                  foregroundColor: Colors.orange,
+                  foregroundColor: Color.fromARGB(255, 255, 108, 67),
                   errorCorrectionLevel: QrErrorCorrectLevel.M,
                 ),
               ),

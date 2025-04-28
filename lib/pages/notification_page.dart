@@ -109,13 +109,13 @@ class _NotificationPageState extends State<NotificationPage> {
         title: const Text(
           'Notifications',
           style: TextStyle(
-            color: Colors.orange,
+            color: Color.fromARGB(255, 255, 108, 67),
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.orange),
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 108, 67)),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
@@ -124,14 +124,14 @@ class _NotificationPageState extends State<NotificationPage> {
               onPressed: _markAllAsRead,
               child: const Text(
                 'Mark all as read',
-                style: TextStyle(color: Colors.orange),
+                style: TextStyle(color: Color.fromARGB(255, 255, 108, 67)),
               ),
             ),
         ],
       ),
       body: SafeArea(
         child: isLoading
-            ? const Center(child: CircularProgressIndicator(color: Colors.orange))
+            ? const Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 255, 108, 67)))
             : user == null
             ? const Center(
           child: Text(
@@ -147,7 +147,7 @@ class _NotificationPageState extends State<NotificationPage> {
               Icon(
                 Icons.notifications_none,
                 size: 60,
-                color: Colors.orange,
+                color: Color.fromARGB(255, 255, 108, 67),
               ),
               SizedBox(height: 16),
               Text(
@@ -163,7 +163,7 @@ class _NotificationPageState extends State<NotificationPage> {
           itemBuilder: (context, index) {
             final notification = notifications[index];
             return Card(
-              color: notification['isRead'] ? Colors.white : Colors.orange.shade50,
+              color: notification['isRead'] ? Colors.white : Colors.deepOrange.shade50,
               elevation: 2,
               margin: const EdgeInsets.only(bottom: 12),
               shape: RoundedRectangleBorder(
@@ -172,7 +172,7 @@ class _NotificationPageState extends State<NotificationPage> {
               child: ListTile(
                 leading: Icon(
                   Icons.notifications,
-                  color: notification['isRead'] ? Colors.grey : Colors.orange,
+                  color: notification['isRead'] ? Colors.grey : Color.fromARGB(255, 255, 108, 67),
                 ),
                 title: Text(
                   notification['title'],

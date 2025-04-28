@@ -118,11 +118,11 @@ class _LoginPageState extends State<LoginPage> {
           SingleChildScrollView(
             padding: const EdgeInsets.all(40.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 50),
                 const Text(
-                  'Login',
+                  'Log In',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -182,25 +182,8 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: const Text(
                     'Forgot Password?',
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Color.fromARGB(255, 233, 133, 82)),
                   ),
-                ),
-                const SizedBox(height: 30),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('or sign up with:', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    IconButton(icon: const Icon(Icons.camera_alt_outlined), onPressed: () {}),
-                    IconButton(icon: const Icon(Icons.mail_outline), onPressed: () {}),
-                    IconButton(icon: const Icon(Icons.facebook), onPressed: () {}),
-                    IconButton(icon: const Icon(Icons.phone), onPressed: () {}),
-                  ],
                 ),
                 const SizedBox(height: 30),
                 Row(
@@ -212,14 +195,13 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                             context, MaterialPageRoute(builder: (context) => const SignupPage()));
                       },
-                      child: const Text('Sign Up', style: TextStyle(color: Colors.orange)),
+                      child: const Text('Sign Up', style: TextStyle(color: Color.fromARGB(255, 255, 108, 67))),
                     ),
                   ],
                 ),
               ],
             ),
           ),
-          const BackButtonOverlay(),
           if (_isLoggingIn)
             ModalBarrier(
               color: Colors.black.withOpacity(0.5),

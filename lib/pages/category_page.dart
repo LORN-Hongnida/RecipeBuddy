@@ -3,10 +3,10 @@ import '../widget/custom_bottom_nav.dart';
 import 'home_page.dart';
 import 'ingredient_input_page.dart';
 import 'profile_page.dart';
-import 'category_food_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../widget/notification_widget.dart';
 import '../widget/search_widget.dart';
+import 'category_food_page.dart';
 
 Future<List<Map<String, String>>> fetchFoodItems(String category) async {
   final DatabaseReference ref = FirebaseDatabase.instance.ref('categories/$category');
@@ -78,8 +78,8 @@ class _CategoryPageState extends State<CategoryPage> {
     {'title': 'breakfast', 'image': 'assets/images/breakfast.jpg', 'displayTitle': 'Breakfast'},
     {'title': 'dinner', 'image': 'assets/images/dinner.jpg', 'displayTitle': 'Dinner'},
     {'title': 'vegan', 'image': 'assets/images/vegan.jpg', 'displayTitle': 'Vegan'},
-    {'title': 'desserts', 'image': 'assets/images/dessert.jpg', 'displayTitle': 'Desserts'},
-    {'title': 'drinks', 'image': 'assets/images/drink.jpg', 'displayTitle': 'Drinks'},
+    {'title': 'desserts', 'image': 'assets/images/desserts.jpg', 'displayTitle': 'Desserts'},
+    {'title': 'drinks', 'image': 'assets/images/drinks.jpg', 'displayTitle': 'Drinks'},
     {'title': 'fastfood', 'image': 'assets/images/fastfood.jpg', 'displayTitle': 'Fastfood'},
   ];
 
@@ -92,7 +92,7 @@ class _CategoryPageState extends State<CategoryPage> {
         centerTitle: true,
         title: const Text(
           'Categories',
-          style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Color.fromARGB(255, 255, 108, 67), fontWeight: FontWeight.bold),
         ),
         leading: const SizedBox(),
         actions: [
@@ -174,7 +174,7 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           if (_isLoading)
             const Center(
-              child: CircularProgressIndicator(color: Colors.orange),
+              child: CircularProgressIndicator(color: Color.fromARGB(255, 255, 108, 67)),
             ),
         ],
       ),

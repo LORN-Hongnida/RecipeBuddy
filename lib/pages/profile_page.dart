@@ -169,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        title: const Text('Log Out', style: TextStyle(color: Colors.orange)),
+        title: const Text('Log Out', style: TextStyle(color: Color.fromARGB(255, 255, 108, 67))),
         content: const Text('Are you sure you want to log out?'),
         actions: [
           TextButton(
@@ -188,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.orange,
+              backgroundColor: Color.fromARGB(255, 255, 108, 67),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             ),
             child: const Text('Log Out'),
@@ -212,7 +212,7 @@ class _ProfilePageState extends State<ProfilePage> {
         title: const Text(
           'Profile',
           style: TextStyle(
-            color: Colors.orange,
+            color: Color.fromARGB(255, 255, 108, 67),
             fontWeight: FontWeight.bold,
             fontSize: 21,
           ),
@@ -223,7 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SearchWidget(),
           if (isLoggedIn)
             IconButton(
-              icon: const Icon(Icons.logout, color: Colors.orange),
+              icon: const Icon(Icons.logout, color: Color.fromARGB(255, 255, 108, 67)),
               onPressed: _handleLogout,
             ),
         ],
@@ -257,7 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         CircleAvatar(
                           radius: 50,
-                          // backgroundColor: Colors.orange.shade50,
+                          // backgroundColor: Color.fromARGB(255, 255, 108, 67).shade50,
                           backgroundImage: userImageUrl != null && userImageUrl!.isNotEmpty
                               ? NetworkImage(userImageUrl!)
                               : const AssetImage('assets/images/user.jpg') as ImageProvider,
@@ -276,7 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Container(
                                 padding: const EdgeInsets.all(4),
                                 decoration: const BoxDecoration(
-                                  color: Colors.orange,
+                                  color: Color.fromARGB(255, 255, 108, 67),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Icon(
@@ -297,7 +297,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Colors.orange,
+                        color: Color.fromARGB(255, 255, 108, 67),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -381,7 +381,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.orange,
+                        color: Color.fromARGB(255, 255, 108, 67),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Text(
@@ -437,18 +437,18 @@ class _ProfilePageState extends State<ProfilePage> {
     return ElevatedButton.icon(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        foregroundColor: isPrimary ? Colors.white : Colors.orange,
-        backgroundColor: isPrimary ? Colors.orange : Colors.white,
+        foregroundColor: isPrimary ? Colors.white : Color.fromARGB(255, 255, 108, 67),
+        backgroundColor: isPrimary ? Color.fromARGB(255, 255, 108, 67) : Colors.white,
         padding: const EdgeInsets.symmetric(vertical: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
           side: BorderSide(
-            color: isPrimary ? Colors.transparent : Colors.orange.withOpacity(0.5),
+            color: isPrimary ? Colors.transparent : Color.fromARGB(255, 255, 108, 67).withOpacity(0.5),
             width: 1,
           ),
         ),
         elevation: isPrimary ? 2 : 0,
-        shadowColor: isPrimary ? Colors.orange.withOpacity(0.3) : Colors.transparent,
+        shadowColor: isPrimary ? Color.fromARGB(255, 255, 108, 67).withOpacity(0.3) : Colors.transparent,
       ),
       icon: Icon(icon, size: 18),
       label: Text(
@@ -478,7 +478,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.orange.shade100),
+          border: Border.all(color: Colors.deepOrange.shade100),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -539,7 +539,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         Row(
                           children: [
-                            const Icon(Icons.access_time, size: 14, color: Colors.orange),
+                            const Icon(Icons.access_time, size: 14, color: Color.fromARGB(255, 255, 108, 67)),
                             const SizedBox(width: 4),
                             Text(item['time'], style: const TextStyle(fontSize: 12)),
                           ],
@@ -564,7 +564,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Icon(
             FirebaseAuth.instance.currentUser == null ? Icons.login : Icons.favorite_border,
             size: 60,
-            color: Colors.orange.withOpacity(0.5),
+            color: Color.fromARGB(255, 255, 108, 67).withOpacity(0.5),
           ),
           const SizedBox(height: 16),
           Text(
@@ -593,8 +593,8 @@ class _ProfilePageState extends State<ProfilePage> {
             ElevatedButton(
               onPressed: _handleLogin,
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.orange,
-                side: const BorderSide(color: Colors.orange),
+                foregroundColor: Color.fromARGB(255, 255, 108, 67),
+                side: const BorderSide(color: Color.fromARGB(255, 255, 108, 67)),
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
@@ -608,8 +608,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()));
               },
               style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.orange,
-                side: const BorderSide(color: Colors.orange),
+                foregroundColor: Color.fromARGB(255, 255, 108, 67),
+                side: const BorderSide(color: Color.fromARGB(255, 255, 108, 67)),
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),

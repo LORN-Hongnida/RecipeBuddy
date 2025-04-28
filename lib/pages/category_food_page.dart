@@ -5,7 +5,7 @@ import '../widget/search_widget.dart';
 
 class CategoryFoodPage extends StatelessWidget {
   final String categoryTitle;
-  final List<Map<String, String>> foodItems;
+  final List<Map<String, dynamic>> foodItems;
 
   const CategoryFoodPage({
     super.key,
@@ -32,7 +32,7 @@ class CategoryFoodPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.orange),
+          icon: const Icon(Icons.arrow_back_ios_new, color: Color.fromARGB(255, 255, 108, 67)),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -40,7 +40,7 @@ class CategoryFoodPage extends StatelessWidget {
         title: Text(
           categoryTitle,
           style: const TextStyle(
-            color: Colors.orange,
+            color: Color.fromARGB(255, 255, 108, 67),
             fontWeight: FontWeight.bold,
             fontSize: 22,
           ),
@@ -84,7 +84,7 @@ class CategoryFoodPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.orange.shade100.withOpacity(0.4),
+                      color: Colors.deepOrange.shade100.withOpacity(0.4),
                       blurRadius: 8,
                       offset: const Offset(0, 4),
                     ),
@@ -144,7 +144,7 @@ class CategoryFoodPage extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    const Icon(Icons.access_time, size: 16, color: Colors.orange),
+                                    const Icon(Icons.access_time, size: 16, color: Color.fromARGB(255, 255, 108, 67)),
                                     const SizedBox(width: 4),
                                     Text(item['time'] ?? '0 min'),
                                   ],

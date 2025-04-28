@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/pages/home_page.dart';
 import 'package:recipe_app/pages/login_page.dart';
 import 'package:recipe_app/widget/rounded_button.dart';
 import 'package:recipe_app/widget/image_card.dart'; // Import the new widget
@@ -68,15 +69,15 @@ class WelcomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 RoundedButton(
-                  text: 'I\'m New',
+                  text: 'Quest Mode',
                   onPressed: () {
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                        context, MaterialPageRoute(builder: (context) => HomePage()));
                   },
                 ),
                 const SizedBox(height: 10),
                 RoundedButton(
-                  text: 'I\'ve Been Here',
+                  text: 'Log In/Sign Up',
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                   },

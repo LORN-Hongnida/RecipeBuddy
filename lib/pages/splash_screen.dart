@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
               // SizedBox(height: 20),
               Text(
-                'ScanCook', // Or any other text you want
+                'RecipeBuddy', // Or any other text you want
                 style: TextStyle(
                   fontSize: 35,
                   color: Colors.white,

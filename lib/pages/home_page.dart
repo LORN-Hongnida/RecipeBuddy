@@ -21,7 +21,7 @@ Future<List<Map<String, dynamic>>> fetchAllRecipes() async {
 
     if (snapshot.exists) {
       final value = snapshot.value;
-      debugPrint('All categories data: $value');
+      // debugPrint('All categories data: $value');
 
       if (value is Map) {
         List<Map<String, dynamic>> allRecipes = [];
@@ -53,7 +53,7 @@ Future<List<Map<String, dynamic>>> fetchAllRecipes() async {
           }
         }
 
-        debugPrint('All recipes: $allRecipes');
+        // debugPrint('All recipes: $allRecipes');
         return allRecipes;
       } else {
         debugPrint('Categories data is not a Map');
@@ -76,7 +76,7 @@ Future<List<Map<String, dynamic>>> fetchFoodItems(String category) async {
 
     if (snapshot.exists) {
       final value = snapshot.value;
-      debugPrint('Data for $category: $value');
+      // debugPrint('Data for $category: $value');
 
       if (value is List) {
         // Convert the list to a list of maps, filtering out null values
@@ -86,17 +86,17 @@ Future<List<Map<String, dynamic>>> fetchFoodItems(String category) async {
             .where((entry) => entry.value != null) // Filter out null values
             .map((entry) => Map<String, dynamic>.from(entry.value as Map))
             .toList();
-        debugPrint('Processed items for $category: $items');
+        // debugPrint('Processed items for $category: $items');
         return items;
       } else if (value is Map) {
         // Fallback in case the data is a Map (unlikely based on logs)
         final items = Map<String, dynamic>.from(value).values.map((item) {
           return Map<String, dynamic>.from(item as Map);
         }).toList();
-        debugPrint('Processed items for $category: $items');
+        // debugPrint('Processed items for $category: $items');
         return items;
       } else {
-        debugPrint('Data for $category is neither a List nor a Map');
+        // debugPrint('Data for $category is neither a List nor a Map');
         return [];
       }
     } else {
@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
     // Fetch the list of categories dynamically
     final categoriesSnapshot = await FirebaseDatabase.instance.ref('categories').get();
     if (!categoriesSnapshot.exists) {
-      debugPrint('No categories found in the database');
+      // debugPrint('No categories found in the database');
       setState(() {
         isLoading = false;
       });
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     final categoryNames = (categoriesSnapshot.value as Map).keys.cast<String>().toList();
-    debugPrint('Available categories: $categoryNames');
+    // debugPrint('Available categories: $categoryNames');
 
     // Fetch all recipes and select random ones for trending
     final allRecipes = await fetchAllRecipes();
@@ -213,7 +213,6 @@ class _HomePageState extends State<HomePage> {
       featuredRecipes = featured;
       popularCategories = categories;
       isLoading = false;
-      debugPrint('Featured recipes count: ${featuredRecipes.length}');
     });
   }
 
@@ -322,7 +321,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       isLoading = false;
     });
-    debugPrint('Navigating to CategoryFoodPage for $categoryName with ${foodItems.length} items');
+    // debugPrint('Navigating to CategoryFoodPage for $categoryName with ${foodItems.length} items');
     Navigator.push(
       currentContext,
       MaterialPageRoute(
@@ -352,7 +351,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(width: 8),
             const Text(
-              'ScanCook',
+              'RecipeBuddy',
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 108, 67),
                 fontWeight: FontWeight.bold,
@@ -506,7 +505,7 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     'Please log in or sign up to view your favorite recipes',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 13,
                       color: Colors.grey[600],
                       fontWeight: FontWeight.w500,
                     ),
@@ -523,7 +522,7 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     'Your favorite recipes will appear here. Explore more!',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 13,
                       color: Colors.grey[600],
                       fontWeight: FontWeight.w500,
                     ),

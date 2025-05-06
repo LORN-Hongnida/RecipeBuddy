@@ -1,16 +1,9 @@
-# recipe_app
+# RecipeBuddy
 
-A new Flutter project.
+A Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+RecipeBuddy is a Flutter-based mobile app that helps users find recipes using ingredients they already have. By inputting ingredients, users receive AI-powered recipe recommendations, each with clear step-by-step instructions. The purpose of this application is twofold: 
+To serve users who want to explore new recipes across different cuisines. 
+To help everyday users reduce food waste by recommending dishes they can make with ingredients they already have.
